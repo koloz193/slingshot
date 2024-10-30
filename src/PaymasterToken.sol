@@ -11,8 +11,9 @@ contract PaymasterToken is ERC20, Ownable {
     address public interopAddress;
 
     constructor(
+        address _owner,
         address _interopAddress
-    ) ERC20("SlingshotToken", "SLING") Ownable(msg.sender) {
+    ) ERC20("SlingshotToken", "SLING") Ownable(_owner) {
         interopAddress = _interopAddress;
     }
 

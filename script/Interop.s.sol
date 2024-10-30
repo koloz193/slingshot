@@ -16,7 +16,7 @@ contract InteropScript is Script {
     function run() public {
         vm.startBroadcast();
 
-        interopCenter = new InteropCenter();
+        interopCenter = new InteropCenter{salt: bytes32(0)}(msg.sender);
         console2.log("Deployed InteropCenter at:", address(interopCenter));
 
         {
@@ -84,7 +84,7 @@ contract InteropE2EBundle is Script {
         console2.log("Deployed Greeter at:", address(greeter));
 
         // Step 2: Deploy InteropCenter contract
-        interopCenter = new InteropCenter();
+        interopCenter = new InteropCenter(msg.sender);
         console2.log("Deployed InteropCenter at:", address(interopCenter));
 
         // TODO - deploy separate in the future.
@@ -181,7 +181,7 @@ contract InteropE2ETx is Script {
         console2.log("Deployed Greeter at:", address(greeter));
 
         // Step 2: Deploy InteropCenter contract
-        interopCenter = new InteropCenter();
+        interopCenter = new InteropCenter(msg.sender);
         console2.log("Deployed InteropCenter at:", address(interopCenter));
 
         // TODO - deploy separate in the future.

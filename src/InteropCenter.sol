@@ -13,7 +13,10 @@ import {SystemContractsCaller} from "../lib/era-contracts/system-contracts/contr
 import {CrossPaymaster} from "../src/CrossPaymaster.sol";
 import {PaymasterToken} from "../src/PaymasterToken.sol";
 
+// 0x295a81c1
 error Unauthorized(address, address);
+// 0x48eacca6
+error UntrustedSource(address);
 
 contract InteropCenter {
     bytes1 constant BUNDLE_PREFIX = 0x01;
