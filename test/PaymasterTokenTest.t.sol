@@ -23,13 +23,13 @@ contract PaymasterScript is Test, TestExt {
     function setUp() public {}
 
     function test_Simple() public {
-        interopCenter = new InteropCenter();
+        interopCenter = new InteropCenter(msg.sender);
         console2.log("Deployed InteropCenter at:", address(interopCenter));
 
-        paymasterToken = new PaymasterToken();
+        paymasterToken = new PaymasterToken(msg.sender);
         console2.log("Deployed Paymaster token at:", address(paymasterToken));
 
-        crossPaymaster = new CrossPaymaster();
+        crossPaymaster = new CrossPaymaster(msg.sender);
         console2.log("Deployed Paymaster  at:", address(crossPaymaster));
 
         greeter = new Greeter();

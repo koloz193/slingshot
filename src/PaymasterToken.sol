@@ -5,9 +5,9 @@ import "../lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract PaymasterToken is ERC20, Ownable {
-    constructor()
+    constructor(address _owner)
         ERC20("CrossChainPaymasterToken", "CCPT")
-        Ownable(msg.sender)
+        Ownable(_owner)
     {}
 
     function mint(address to, uint256 amount) external onlyOwner {

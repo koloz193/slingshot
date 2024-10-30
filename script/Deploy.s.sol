@@ -27,7 +27,7 @@ contract Deploy is Script {
         interopCenter = new InteropCenter{salt: bytes32(0)}(msg.sender);
         console2.log("Deployed InteropCenter at:", address(interopCenter));
 
-        paymasterToken = new PaymasterToken{salt: bytes32(0)}();
+        paymasterToken = new PaymasterToken{salt: bytes32(0)}(msg.sender);
         console2.log("Deployed Paymaster token at:", address(paymasterToken));
 
         crossPaymaster = new CrossPaymaster{salt: bytes32(0)}(address(paymasterToken));

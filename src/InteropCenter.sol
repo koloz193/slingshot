@@ -11,7 +11,10 @@ import {SystemContractHelper} from "../lib/era-contracts/system-contracts/contra
 import {IContractDeployer} from "../lib/era-contracts/system-contracts/contracts/ContractDeployer.sol";
 import {SystemContractsCaller} from "../lib/era-contracts/system-contracts/contracts/libraries/SystemContractsCaller.sol";
 
+// 0x295a81c1
 error Unauthorized(address, address);
+// 0x48eacca6
+error UntrustedSource(address);
 
 contract InteropCenter {
     bytes1 constant BUNDLE_PREFIX = 0x01;

@@ -498,8 +498,8 @@ async fn main() -> anyhow::Result<()> {
                 .unwrap();
 
             println!(
-                "Trust from {} to {} tx {:?}",
-                source_chain.chain_id, destination_chain.chain_id, tx_hash
+                "Trust from {} to {} tx {:?} with interop centers {} and {}",
+                source_chain.chain_id, destination_chain.chain_id, tx_hash, source_chain.interop_address, destination_chain.interop_address
             );
         }
     }
