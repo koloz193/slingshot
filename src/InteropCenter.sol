@@ -11,6 +11,8 @@ import {SystemContractHelper} from "../lib/era-contracts/system-contracts/contra
 import {IContractDeployer} from "../lib/era-contracts/system-contracts/contracts/ContractDeployer.sol";
 import {SystemContractsCaller} from "../lib/era-contracts/system-contracts/contracts/libraries/SystemContractsCaller.sol";
 
+error Unauthorized(address, address);
+
 contract InteropCenter {
     bytes1 constant BUNDLE_PREFIX = 0x01;
     bytes1 constant TRANSACTION_PREFIX = 0x02;
@@ -19,13 +21,15 @@ contract InteropCenter {
     address public owner;
 
     // Constructor to set the owner
-    constructor() {
-        owner = msg.sender;
+    constructor(address _newOwner) {
+        owner = _newOwner;
     }
 
     // Modifier to restrict access to only the owner
     modifier onlyOwner() {
-        require(msg.sender == owner, "Not authorized");
+        if (msg.sender != owner) {
+            revert Unauthorized(owner, msg.sender);
+        }
         _;
     }
 

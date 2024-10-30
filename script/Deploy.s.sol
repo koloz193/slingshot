@@ -24,16 +24,16 @@ contract Deploy is Script {
     function run() public {
         vm.startBroadcast();
 
-        interopCenter = new InteropCenter();
+        interopCenter = new InteropCenter{salt: bytes32(0)}(msg.sender);
         console2.log("Deployed InteropCenter at:", address(interopCenter));
 
-        paymasterToken = new PaymasterToken();
+        paymasterToken = new PaymasterToken{salt: bytes32(0)}();
         console2.log("Deployed Paymaster token at:", address(paymasterToken));
 
-        crossPaymaster = new CrossPaymaster(address(paymasterToken));
+        crossPaymaster = new CrossPaymaster{salt: bytes32(0)}(address(paymasterToken));
         console2.log("Deployed Paymaster  at:", address(crossPaymaster));
 
-        greeter = new Greeter();
+        greeter = new Greeter{salt: bytes32(0)}();
         console2.log("Deployed greeter at:", address(greeter));
 
         // register preferred local paymaster.
