@@ -43,4 +43,4 @@ RUN chmod +x /usr/local/bin/slingshot && \
 USER root
 
 # Step 12: Explicitly run the server binary with its full path
-CMD ["sh", "-c", "/usr/local/bin/slingshot -r ${CHAIN_1_RPC} ${INTEROP_ADDR} -r ${CHAIN_2_RPC} ${INTEROP_ADDR} --private-key ${PRIV_KEY}"]
+CMD ["sh", "-c", "/usr/local/bin/slingshot -r ${CHAIN_1_RPC} ${INTEROP_ADDR} -r ${CHAIN_2_RPC} ${INTEROP_ADDR} --private-key ${PRIV_KEY} --base-token-price 200000 --base-token-price 100 --paymaster-balance-cents 20000"]

@@ -20,7 +20,7 @@ contract TransactionConversion is Test, TestExt {
     function setUp() public {}
 
     function test_Conversion() public {
-        interopCenter = new InteropCenter();
+        interopCenter = new InteropCenter(msg.sender);
         console2.log("Deployed InteropCenter at:", address(interopCenter));
 
         address interopOnSource = address(
@@ -150,9 +150,9 @@ contract TokensInterop is Test, TestExt {
 
     function test_Tokens() public {
         // Chain 1
-        interopCenter = new InteropCenter();
+        interopCenter = new InteropCenter(msg.sender);
         console2.log("Deployed InteropCenter at:", address(interopCenter));
-        paymasterToken = new PaymasterToken(address(interopCenter));
+        paymasterToken = new PaymasterToken(msg.sender, address(interopCenter));
         console2.log("Deployed Paymaster token at:", address(paymasterToken));
         crossPaymaster = new CrossPaymaster(
             address(paymasterToken),
@@ -161,9 +161,9 @@ contract TokensInterop is Test, TestExt {
         console2.log("Deployed Paymaster  at:", address(crossPaymaster));
 
         // Chain 2
-        interopCenter2 = new InteropCenter();
+        interopCenter2 = new InteropCenter(msg.sender);
         console2.log("Deployed InteropCenter at:", address(interopCenter2));
-        paymasterToken2 = new PaymasterToken(address(interopCenter2));
+        paymasterToken2 = new PaymasterToken(msg.sender, address(interopCenter2));
         console2.log("Deployed Paymaster token at:", address(paymasterToken2));
         crossPaymaster2 = new CrossPaymaster(
             address(paymasterToken2),

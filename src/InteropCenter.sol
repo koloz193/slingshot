@@ -931,12 +931,13 @@ contract InteropAccount is IAccount {
         require(msg.sender == trustedInteropCenter, "Untrusted interop center");
         console2.log("Inside aliased account", address(this));
         console2.log("destination", interopCall.destinationAddress);
+        console2.log("value", interopCall.value);
 
         // Forward the call to the destination address
-        (bool success, ) = interopCall.destinationAddress.call{
+        (bool success, bytes memory data) = interopCall.destinationAddress.call{
             value: interopCall.value
         }(interopCall.data);
-        require(success, "Interop call failed");
+        require(success, bytesToHex(data));
     }
 
     function validateTransaction(
@@ -1090,5 +1091,20 @@ contract InteropAccount is IAccount {
 
     receive() external payable {
         // If the contract is called directly, behave like an EOA
+    }
+
+    function bytesToHex(bytes memory buffer) internal pure returns (string memory) {
+
+        // Fixed buffer size for hexadecimal convertion
+        bytes memory converted = new bytes(buffer.length * 2);
+
+        bytes memory _base = "0123456789abcdef";
+
+        for (uint256 i = 0; i < buffer.length; i++) {
+            converted[i * 2] = _base[uint8(buffer[i]) / _base.length];
+            converted[i * 2 + 1] = _base[uint8(buffer[i]) % _base.length];
+        }
+
+        return string(abi.encodePacked("0x", converted));
     }
 }
