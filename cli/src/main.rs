@@ -226,6 +226,7 @@ impl InteropMessageParsed {
             .await;
 
         println!("  'from' address set to: {:?}", from_addr);
+        println!("  value set to : {:?}", interop_tx.value);
 
         let code = destination_interop_chain
             .provider
@@ -550,6 +551,7 @@ async fn handle_type_c_message(
         let empty_signature = Signature::new(U256::ZERO, U256::ZERO, Default::default());
 
         if let alloy_zksync::network::unsigned_tx::TypedTransaction::Eip712(data) = unsigned_tx {
+            println!("interop msg value: {}", data.value);
             // What about the hash??
             let signed_tx =
                 TxEnvelope::Eip712(Signed::new_unchecked(data, empty_signature, B256::ZERO));

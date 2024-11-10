@@ -609,18 +609,19 @@ contract InteropCenter {
                 address(this),
                 amount - tokensMinted
             );
-        } else {
-            if (amount < tokensMinted) {
-                console2.log(
-                    "Sending user back some tokens",
-                    tokensMinted - amount
-                );
-                PaymasterToken(localToken).transfer(
-                    msg.sender,
-                    tokensMinted - amount
-                );
-            }
-        }
+        } 
+        // else {
+        //     if (amount < tokensMinted) {
+        //         console2.log(
+        //             "Sending user back some tokens",
+        //             tokensMinted - amount
+        //         );
+        //         PaymasterToken(localToken).transfer(
+        //             msg.sender,
+        //             tokensMinted - amount
+        //         );
+        //     }
+        // }
 
         address remoteRecipient = getRemoteAliasedAccount(
             msg.sender,
@@ -688,7 +689,7 @@ contract InteropCenter {
             destinationChain,
             destinationAddress,
             payload,
-            0
+            msg.value
         );
         address remotePaymaster = preferredPaymasters[destinationChain];
 
@@ -697,7 +698,7 @@ contract InteropCenter {
                 destinationChain,
                 gasLimit,
                 gasPrice,
-                0,
+                msg.value,
                 bundleHash,
                 feeBundleHash,
                 remotePaymaster,

@@ -35,6 +35,7 @@ contract CrossPaymaster is IPaymaster {
     ) external payable returns (bytes4 magic, bytes memory) {
         // AAA - do not use msg.sender -- it is 'bootloader'..
         console2.log("using paymaster!!");
+        console2.log("msg value: ", _transaction.value);
 
         // It should:
         // - check that full transaction is legit
